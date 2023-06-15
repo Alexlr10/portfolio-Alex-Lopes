@@ -11,7 +11,7 @@ import {
   DiPostgresql,
 } from "react-icons/di";
 import { SiDocker, SiRabbitmq, SiSpring, SiTypescript } from "react-icons/si";
-
+import { useEffect, useState } from "react";
 import "../../styles/components/technologiescontainer.sass";
 
 const technologies = [
@@ -32,6 +32,20 @@ const technologies = [
 ];
 
 const TechnologiesContainer = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <section className="technologies-container">
       <h2>Experiência</h2>
@@ -40,13 +54,15 @@ const TechnologiesContainer = () => {
           <div className="technology-card" id={tech.id} key={tech.id}>
             {tech.icon}
             <div className="technology-info">
-              <h3>{tech.name}</h3>
+              <h3 style={{ fontSize: windowWidth < 768 ? "14px" : "18px" }}>
+                {tech.name}
+              </h3>
             </div>
           </div>
         ))}
       </div>
     </section>
   );
-}
+};
 
-export default TechnologiesContainer
+export default TechnologiesContainer;
