@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import "../../styles/components/projectsContainer.sass";
+import "../../styles/components/mainContent.sass";
 
 const ProjectsContainer = () => {
 
@@ -35,19 +37,26 @@ const ProjectsContainer = () => {
   };
 
   return (
-    <section id="projects">
-      {itemsApi.map(item => (
-        <div className="info-card" key={item.id}>
-          <li>
-            <p>{item.name}</p>
-            <a href={item.html_url} target="_blank" rel="noopener noreferrer">
-              URL: {item.html_url}
-            </a>
-            <p>Data Criação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.created_at))}</p>
-          </li>
-        </div>
-      ))}
-    </section>
+    <main id="main-content">
+      <div className="btnBack">
+        <Link to="/portfolio-Alex-Lopes" className="btn">
+          Voltar
+        </Link>
+      </div>
+      <section id="projects">
+        {itemsApi.map(item => (
+          <div className="info-card" key={item.id}>
+            <li>
+              <p>{item.name}</p>
+              <a href={item.html_url} target="_blank" rel="noopener noreferrer">
+                URL: {item.html_url}
+              </a>
+              <p>Data Criação: {Intl.DateTimeFormat('pt-BR').format(new Date(item.created_at))}</p>
+            </li>
+          </div>
+        ))}
+      </section>
+    </main >
   )
 }
 
